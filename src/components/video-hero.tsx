@@ -31,11 +31,11 @@ export default function VideoHero() {
   }
 
   return (
-    <section className="relative my-6 h-[90vh] overflow-hidden bg-black">
+    <section className="relative my-6 h-[75vh] sm:h-[90vh] overflow-hidden bg-black">
 
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-contain sm:object-cover object-top sm:object-center"
         playsInline
         muted
         autoPlay
