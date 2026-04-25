@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@components*": ["./src/components/*"],
+      "@config*": ["./src/config/*"],
+      "@hooks*": ["./src/hooks/*"],
+      "@lib*": ["./src/lib/*"],
+      "@icons*": ["./src/assets/icons/*"],
     }
   },
   "include": [
@@ -29,6 +34,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/app/(root)/paralax"  ],
   "exclude": ["node_modules"]
 }
