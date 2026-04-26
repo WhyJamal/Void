@@ -1,48 +1,41 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Play, Pause, RotateCcw } from "lucide-react"
 
-export default function VideoHero() {
+type VideoHeroProps = {
+  isPlaying: boolean;
+  onToggle: () => void
+}
+
+export default function VideoHero({ isPlaying, onToggle }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [playing, setPlaying] = useState(true)
-  const [ended, setEnded] = useState(false)
 
-  const togglePlay = () => {
-    if (!videoRef.current) return
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
 
-    if (playing) {
-      videoRef.current.pause()
-      setPlaying(false)
+    if (isPlaying) {
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => { })
+      }
     } else {
-      videoRef.current.play()
-      setPlaying(true)
+      video.pause()
     }
-  }
-
-  const handleReplay = () => {
-    if (!videoRef.current) return
-
-    videoRef.current.currentTime = 0
-    videoRef.current.play()
-    setEnded(false)
-    setPlaying(true)
-  }
+  }, [isPlaying])
 
   return (
-    <section className="relative my-6 h-[75vh] sm:h-[90vh] overflow-hidden bg-black">
+    <section className="relative my-2 h-[85vh] sm:h-[90vh] overflow-hidden bg-black">
 
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-contain sm:object-cover object-top sm:object-center"
+        className="absolute inset-0 h-full w-full object-cover"
         playsInline
         muted
         autoPlay
-        onEnded={() => {
-          setEnded(true)
-          setPlaying(false)
-        }}
+        loop
       >
         <source src="/videos/erp-landing-hero-v1.webm" type="video/webm" />
         <source src="/videos/erp-landing-hero-v2.mp4" type="video/mp4" />
@@ -83,14 +76,14 @@ export default function VideoHero() {
             </p>
           </div>
 
-          <div className="flex w-full lg:w-auto flex-col sm:flex-row items-stretch sm:items-end gap-3">
+          <div className="flex sm:w-full w-75 lg:w-auto items-stretch sm:items-end gap-3">
 
-            <button className="w-full sm:w-auto rounded-full bg-white px-5 sm:px-6 lg:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-black hover:bg-white/90 transition">
+            <button className="w-full sm:w-auto rounded-full bg-white px-1 sm:px-6 lg:px-7 py-1 sm:py-3 text-xs sm:text-sm font-semibold text-black hover:bg-white/90 transition">
               Начать бесплатно
             </button>
 
             <button className="w-full sm:w-auto rounded-full border border-white/30 bg-white/10 px-5 sm:px-6 lg:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition">
-              Связаться с продажами
+              Связаться
             </button>
 
           </div>
@@ -98,26 +91,17 @@ export default function VideoHero() {
         </div>
       </div>
 
-      <div className="absolute top-4 right-4 sm:top-auto sm:bottom-6 sm:right-6">
-        {ended ? (
+      <div className="hidden sm:flex absolute top-4 right-4 sm:top-auto sm:bottom-6 sm:right-6">
           <button
-            onClick={handleReplay}
+            onClick={onToggle}
             className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white text-white backdrop-blur-sm"
           >
-            <RotateCcw className="h-4 w-4" />
-          </button>
-        ) : (
-          <button
-            onClick={togglePlay}
-            className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white text-white backdrop-blur-sm"
-          >
-            {playing ? (
+            {isPlaying ? (
               <Pause fill="#fff" className="h-4 w-4" />
             ) : (
               <Play fill="#fff" className="absolute left-2.5 top-3 h-4 w-4 translate-x-0.5" />
             )}
           </button>
-        )}
       </div>
 
     </section>

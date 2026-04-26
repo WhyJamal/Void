@@ -7,6 +7,7 @@ import Link from "next/link";
 import { CarouselPlugin } from "@/components/carousel-plugin";
 import VideoHero from "@/components/video-hero";
 import { features } from "@/config/features.config";
+import HeroSection from "@/components/hero-section";
 
 const container = {
   hidden: { opacity: 0, y: 18 },
@@ -58,11 +59,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#f5f5f7] text-black antialiased">
 
-      <VideoHero />
-
-      <section className="flex items-center justify-center overflow-hidden py-6 px-5">
-        <CarouselPlugin />
-      </section>
+      <HeroSection/>
 
       <section id="features" className="mx-auto max-w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-10">
         <motion.div
