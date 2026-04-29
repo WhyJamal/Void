@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 
 type AuthFieldRowProps = {
   label: string;
+  name?: string;
+  error?: string
   type: "text" | "email" | "password";
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -17,6 +19,8 @@ type AuthFieldRowProps = {
 
 export function AuthFieldRow({
   label,
+  name,
+  error,
   type,
   value,
   onChange,
@@ -33,11 +37,18 @@ export function AuthFieldRow({
       <Input
         type={type}
         value={value}
+        name={name}
         onChange={onChange}
         disabled={disabled}
         placeholder={placeholder}
         className={`h-10 border-0 bg-transparent p-0 text-[22px] shadow-none focus-visible:ring-0 ${inputClassName}`}
       />
+
+      {error && (
+        <p className="mt-1 text-xs text-red-500">
+          {error}
+        </p>
+      )}
 
       {children}
     </div>

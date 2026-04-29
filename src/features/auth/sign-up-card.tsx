@@ -3,35 +3,34 @@
 import { AuthFieldRow } from "@components/auth/auth-field-row";
 import { ArrowActionButton } from "@components/auth/arrow-action-button";
 import { useState } from "react";
+import { registerAction } from "@actions/register.action";
+import { useForm } from "@/hooks/use-form";
+import { signUpSchema } from "@/schema/sign-up-schema";
 
 export default function SignUpCard() {
   const [step, setStep] = useState<"base" | "password">("base");
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [loading, setLoading] = useState(false);
+  const {
+    values: form,
+    errors,
+    loading,
+    handleChange,
+    handleSubmit,
+  } = useForm({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    schema: signUpSchema,
+    onSubmit: async (data) => {
+      await registerAction(data);
+    },
+  });
 
   const handleNext = async () => {
-    setLoading(true);
-    await new Promise((res) => setTimeout(res, 800));
-    setLoading(false);
     setStep("password");
-  };
-
-  const handleSubmit = async () => {
-    if (password !== confirmPassword) {
-      alert("Пароли не совпадают");
-      return;
-    }
-
-    setLoading(true);
-    await new Promise((res) => setTimeout(res, 1000));
-    setLoading(false);
-
-    alert("Успешная регистрация 🚀");
   };
 
   return (
@@ -44,31 +43,35 @@ export default function SignUpCard() {
         <AuthFieldRow
           label="Имя пользователя"
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={form.name}
+          error={errors.name}
+          onChange={handleChange}
           placeholder="Введите имя"
           containerClassName={`border-b px-5 py-3 transition-colors duration-300 ${step === "password"
-              ? "bg-[#dfeaf8] border-neutral-300"
-              : name
-                ? "bg-yellow-100 border-neutral-200"
-                : "bg-white border-neutral-200"
+            ? "bg-[#dfeaf8] border-neutral-300"
+            : form.name
+              ? "bg-yellow-100 border-neutral-200"
+              : "bg-white border-neutral-200"
             }`}
         />
 
         <AuthFieldRow
           label="Электронная почта"
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={form.email}
+          error={errors.email}
+          onChange={handleChange}
           placeholder="Введите email"
           containerClassName={`relative border-b px-5 py-3 transition-colors duration-300 ${step === "password"
-              ? "bg-[#dfeaf8] border-neutral-300"
-              : email
-                ? "bg-yellow-100 border-neutral-200"
-                : "bg-white border-neutral-200"
+            ? "bg-[#dfeaf8] border-neutral-300"
+            : form.email
+              ? "bg-yellow-100 border-neutral-200"
+              : "bg-white border-neutral-200"
             }`}
         >
-          {step === "base" && name && email && (
+          {step === "base" && form.name && form.email && (
             <ArrowActionButton
               onClick={handleNext}
               loading={loading}
@@ -83,25 +86,29 @@ export default function SignUpCard() {
             <AuthFieldRow
               label="Пароль"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              error={errors.password}
+              value={form.password}
+              onChange={handleChange}
               placeholder="Введите пароль"
-              containerClassName={`border-b px-5 py-3 transition-colors duration-300 ${password
-                  ? "bg-yellow-100 border-neutral-200"
-                  : "bg-white border-neutral-200"
+              containerClassName={`border-b px-5 py-3 transition-colors duration-300 ${form.password
+                ? "bg-yellow-100 border-neutral-200"
+                : "bg-white border-neutral-200"
                 }`}
             />
 
             <AuthFieldRow
               label="Подтвердите пароль"
               type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="confirmPassword"
+              error={errors.confirmPassword}
+              value={form.confirmPassword}
+              onChange={handleChange}
               placeholder="Повторите пароль"
-              containerClassName={`relative px-5 py-3 pr-14 transition-colors duration-300 ${confirmPassword ? "bg-yellow-100" : ""
+              containerClassName={`relative px-5 py-3 pr-14 transition-colors duration-300 ${form.confirmPassword ? "bg-yellow-100" : ""
                 }`}
             >
-              {password && confirmPassword && (
+              {form.password && form.confirmPassword && (
                 <ArrowActionButton
                   onClick={handleSubmit}
                   loading={loading}

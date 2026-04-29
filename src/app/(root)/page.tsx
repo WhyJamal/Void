@@ -4,15 +4,11 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import Link from "next/link";
 
-import { CarouselPlugin } from "@/components/carousel-plugin";
-import VideoHero from "@/components/video-hero";
 import { features } from "@/config/features.config";
-import HeroSection from "@/components/hero-section";
-
-const container = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0 },
-};
+import HeroSection from "@/components/home/hero-section";
+import { FAQ } from "@/components/home/faq";
+import SyncedCarousel from "@/components/home/showcase-section";
+import { FeatureCard } from "@/components/home/feature-card";
 
 const stagger = {
   hidden: {},
@@ -32,34 +28,11 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function FeatureCard({
-  icon: Icon,
-  title,
-  desc,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <motion.div
-      variants={container}
-      className="group rounded-3xl border border-black/8 bg-white/80 p-6 shadow-[0_1px_0_rgba(0,0,0,0.03),0_24px_60px_rgba(0,0,0,0.06)] backdrop-blur transition-transform duration-300 hover:-translate-y-1"
-    >
-      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-black/8 bg-black text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-        <Icon className="h-5 w-5" />
-      </div>
-      <h3 className="text-lg font-semibold tracking-tight text-black">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-black/60">{desc}</p>
-    </motion.div>
-  );
-}
-
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#f5f5f7] text-black antialiased">
 
-      <HeroSection/>
+      <HeroSection />
 
       <section id="features" className="mx-auto max-w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-10">
         <motion.div
@@ -87,6 +60,9 @@ export default function HomePage() {
           </div>
         </motion.div>
       </section>
+
+      <SyncedCarousel /> 
+      <FAQ />
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
         <div className="rounded-[2rem] border border-black/8 bg-black px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.2)] sm:px-10 sm:py-14">

@@ -20,10 +20,12 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@actions*": ["./src/actions/*"],
       "@components*": ["./src/components/*"],
       "@config*": ["./src/config/*"],
       "@hooks*": ["./src/hooks/*"],
       "@lib*": ["./src/lib/*"],
+      "@utils*": ["./src/utils/*"],
       "@icons*": ["./src/assets/icons/*"],
     }
   },
