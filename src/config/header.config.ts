@@ -1,6 +1,7 @@
 import type { MenuItem } from "@/types/header.types";
 import CircleUserRound from "@/assets/icons/circle-user-round";
 import { Bookmark, Package, Settings } from "lucide-react";
+import { PAGES } from "./pages.config";
 
 export const menuItems: MenuItem[] = [
   {
@@ -83,7 +84,7 @@ export const menuItems: MenuItem[] = [
           { title: "Orders", href: "/orders", icon: Package },
           { title: "Your Saves", href: "/saves", icon: Bookmark },
           { title: "Account", href: "/account", icon: Settings },
-          { title: "Sign in", href: "/login", icon: CircleUserRound },
+          { title: "Sign in", href: PAGES.SIGN_IN, icon: CircleUserRound },
         ],
       },
     ],

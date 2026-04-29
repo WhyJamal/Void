@@ -8,6 +8,8 @@ import DropdownMenu from "./dropdown-menu";
 import HeaderIcons from "./header-icons";
 import MobileMenu from "./mobile-menu";
 import SearchOverlay from "./search-overlay";
+import Link from "next/link";
+import { PAGES } from "@/config/pages.config";
 
 export default function Header() {
 
@@ -45,13 +47,17 @@ export default function Header() {
                 style={{ height: "44px" }}
             >
                 <div className="max-w-5xl mx-auto h-full flex items-center justify-between px-4">
-                    <Image
-                        src="/logo.black.png"
-                        alt="void"
-                        width={45}
-                        height={45}
-                        priority
-                    />
+                    <Link
+                        href={PAGES.HOME}
+                    >
+                        <Image
+                            src="/logo.black.png"
+                            alt="void"
+                            width={35}
+                            height={35}
+                            priority
+                        />
+                    </Link>
 
                     <DesktopNav
                         menuItems={menuItems}
