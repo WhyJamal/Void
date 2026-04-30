@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import Link from "next/link";
 
 import { features } from "@/config/features.config";
 import HeroSection from "@/components/home/hero-section";
@@ -63,45 +62,6 @@ export default function HomePage() {
 
       <SyncedCarousel /> 
       <FAQ />
-
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
-        <div className="rounded-[2rem] border border-black/8 bg-black px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.2)] sm:px-10 sm:py-14">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-                <Sparkles className="h-3.5 w-3.5" />
-                Готово к запуску
-              </div>
-
-              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Сделайте ваш продукт более премиальным с первого клика.
-              </h2>
-
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-                Этот макет адаптивный, минималистичный и создан для профессиональной презентации продукта.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-medium text-black transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/95"
-              >
-                Начать бесплатно
-              </Link>
-
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/10"
-              >
-                Связаться с продажами
-              </Link>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
     </main>
   );

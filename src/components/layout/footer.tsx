@@ -12,7 +12,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full border-t bg-white text-sm text-gray-500">
+    <footer className="w-full border-t bg-[#f5f5f7] text-sm text-gray-500">
 
       <div className="hidden md:grid max-w-5xl mx-auto px-4 py-10 grid-cols-4 gap-8">
         {footerItems.map((item) => (

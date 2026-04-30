@@ -70,7 +70,7 @@ export function FAQ() {
 
     return (
         <section className="py-2 sm:py-5">
-            <div className="mx-auto max-w-3xl px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
                 <div className="mb-16">
                     <p className="text-sm font-medium text-black/40 uppercase tracking-widest mb-4">

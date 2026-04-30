@@ -10,6 +10,7 @@ export const menuItems: MenuItem[] = [
       {
         title: "Обзор",
         links: [
+          { title: "Продукты", href: PAGES.PRODUCTS },
           { title: "Функции", href: "/features" },
           { title: "Интеграции", href: "/integrations" },
           { title: "Безопасность", href: "/security" },

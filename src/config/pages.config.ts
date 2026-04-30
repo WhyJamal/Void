@@ -3,4 +3,7 @@ export const PAGES = {
     
     SIGN_IN: '/auth/sign-in',
     SIGN_UP: '/auth/sign-up',
+
+    PRODUCTS: '/products',
+    PRODUCT: (productId: string | number) => `/product/${productId}`
 }
