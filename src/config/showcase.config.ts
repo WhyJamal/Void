@@ -36,25 +36,25 @@ export const bottomRow: ShowcaseCard[] = [
   {
     title: "Мгновенный чат",
     subtitle: "Обсуждайте задачи прямо в приложении",
-    image: "images/showcase/photo-1522202176988-66273c2fd55f.webp",
+    image: "/images/showcase/photo-1522202176988-66273c2fd55f.webp",
     href: "/support",
   },
   {
     title: "Авто-напоминания",
     subtitle: "Ежедневные, еженедельные и умные напоминания",
-    image: "images/showcase/photo-1553877522-43269d4ea984.webp",
+    image: "/images/showcase/photo-1553877522-43269d4ea984.webp",
     href: "/features",
   },
   {
     title: "Безопасность прежде всего",
     subtitle: "Роли, разрешения, аудит действий",
-    image: "images/showcase/photo-1563986768609-322da13575f3.webp",
+    image: "/images/showcase/photo-1563986768609-322da13575f3.webp",
     href: "/security",
   },
   {
     title: "Проверка в один клик",
     subtitle: "Быстрое утверждение работы",
-    image: "images/showcase/photo-1497366754035-f200968a6e72.webp",
+    image: "/images/showcase/photo-1497366754035-f200968a6e72.webp",
     href: "/pricing",
   },
 ];

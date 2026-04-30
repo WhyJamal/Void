@@ -54,6 +54,7 @@ export default function VideoHero({ isPlaying, onToggle }: VideoHeroProps) {
                   src="/logo.white.png"
                   alt="logo"
                   fill
+                  sizes="120px"
                   className="object-contain p-1"
                 />
               </div>

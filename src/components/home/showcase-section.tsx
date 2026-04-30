@@ -5,6 +5,7 @@ import { useMobile } from "@hooks/use-mobile";
 import { Pause, Play } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSyncedCarousel } from "@components/hooks/use-synced-carousel";
+import Image from "next/image";
 
 const N = topRow.length;
 
@@ -75,7 +76,7 @@ export default function SyncedCarousel() {
                         return (
                             <div
                                 key={i}
-                                className="relative shrink-0 cursor-pointer overflow-hidden px-2"
+                                className="relative shrink-0 cursor-pointer overflow-hidden"
                                 style={{ width: slideW, height: mainH }}
                                 onClick={() => {
                                     const diff = i - vIdx;
@@ -83,11 +84,13 @@ export default function SyncedCarousel() {
                                     if (isPlaying) startTimer();
                                 }}
                             >
-                                <img
+                                <Image
                                     src={s.image}
                                     alt={s.title}
-                                    className="w-full h-full object-cover block"
+                                    className="w-full h-full object-cover block px-3"
                                     draggable={false}
+                                    fill
+                                    sizes="900px"
                                 />
                                 <div
                                     className="absolute inset-0 bg-black/22 transition-opacity duration-300"
@@ -134,15 +137,17 @@ export default function SyncedCarousel() {
                         return (
                             <div
                                 key={i}
-                                className="relative shrink-0 cursor-pointer overflow-hidden px-2"
+                                className="relative shrink-0 cursor-pointer overflow-hidden"
                                 style={{ width: thumbW, height: thumbH }}
                                 onClick={() => goTo(i % N)}
                             >
-                                <img
+                                <Image
                                     src={s.image}
                                     alt={s.title}
-                                    className="w-full h-full object-cover block"
+                                    className="w-full h-full object-cover block px-2"
                                     draggable={false}
+                                    fill
+                                    sizes="700px"
                                 />
                                 <div
                                     className="absolute inset-0 transition-opacity duration-300"

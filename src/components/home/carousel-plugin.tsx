@@ -52,6 +52,7 @@ export function CarouselPlugin({ isPlaying, onToggle }: CarouselPluginProps) {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="700px"
                     className="object-cover transition"
                   />
                 </div>
