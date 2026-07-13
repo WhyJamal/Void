@@ -1,4 +1,4 @@
-import { PRODUCTS } from "@/config/products.config";
+import { getProductByIdAction } from "@/actions/saas.actions";
 import ProductClient from "./product-client";
 
 interface ProductPageProps {
@@ -9,11 +9,10 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-
-  const product = PRODUCTS.find(p => String(p.id) === id);
+  const product = await getProductByIdAction(id);
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div className="p-10 text-center text-sm text-gray-500">Продукт не найден</div>;
   }
 
   return <ProductClient product={product} />;

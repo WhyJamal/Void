@@ -1,79 +1,134 @@
-"use client";
-
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarDays, Layers3 } from "lucide-react";
 import Link from "next/link";
 import { PAGES } from "@/config/pages.config";
-import { PRODUCTS } from "@/config/products.config";
+import { getProductsAction } from "@/actions/saas.actions";
+import { IProduct } from "@/types/product.types";
 
 function getProductClass(index: number, length: number) {
-    const isLastOddItem = length % 2 === 1 && index === length - 1;
+  const isLastOddItem = length % 2 === 1 && index === length - 1;
 
-    return isLastOddItem ? "md:col-span-2" : "";
+  return isLastOddItem ? "md:col-span-2" : "";
 }
 
-export default function ERPProductsPage() {
-    return (
-        <main className="min-h-screen bg-[#f9f9f9] text-black">
+function formatDate(value?: string | null) {
+  if (!value) return "Нет сроков";
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(value));
+}
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3">
-                {PRODUCTS.map((product, index) => (
-                    <div
-                        key={product.id}
-                        className={`relative flex flex-col items-center px-8 pt-14 pb-10 min-h-140 overflow-hidden ${getProductClass(index, PRODUCTS.length)}`}
-                    >
-                        <Image
-                            src={product.image}
-                            alt={product.imageAlt}
-                            fill
-                            className="object-cover object-center"
-                            priority
-                        />
-                        <div className="absolute inset-0 text-4xl sm:text-5xl font-semibold tracking-tight leading-tight mb-6 bg-linear-to-b from-black to-black/60 bg-clip-text text-transparent" />
+export default async function ERPProductsPage() {
+  const products = await getProductsAction();
 
-                        <div className="relative z-10 flex flex-col items-center w-full flex-1">
+  return (
+    <main className="min-h-screen bg-[#f9f9f9] text-black">
+      <section className="px-6 pb-8 pt-16 md:px-10">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
+            Продукты
+          </p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+            Продукты, проекты и тарифы в одной системе
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-500 sm:text-lg">
+            Все данные берутся из базы: продукты, связанные организации, проекты с дедлайнами и тарифные планы.
+          </p>
+        </div>
+      </section>
 
-                            <span className="mb-4 inline-block rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-semibold tracking-widest uppercase px-4 py-1">
-                                {product.badge}
-                            </span>
+      <section className="grid grid-cols-1 gap-3 p-3 md:grid-cols-2">
+        {products.map((product: IProduct, index: number) => {
+          const nextDeadline = product.projects?.[0]?.dueDate ?? null;
+          
+          return (
+            <div
+              key={product.id}
+              className={`relative flex min-h-136 flex-col overflow-hidden px-8 pb-10 pt-14 ${getProductClass(index, products.length)}`}
+            >
+              <Image
+                src={product.image}
+                alt={product.imageAlt}
+                fill
+                className="object-cover object-center"
+                priority={index === 0}
+              />
 
-                            <h2 className="text-[36px] font-bold tracking-tight text-white text-center leading-tight mb-3">
-                                {product.title}
-                            </h2>
+              <div className="absolute inset-0 bg-linear-to-b from-black/10 via-black/40 to-black/75" />
 
-                            <p className="text-[15px] text-white/75 text-center leading-relaxed mb-8 max-w-70">
-                                {product.subtitle}
-                            </p>
+              <div className="relative z-10 flex flex-1 flex-col items-center justify-between text-center text-white">
+                <div>
+                  <span className="mb-4 inline-block rounded-full border border-white/30 bg-white/15 px-4 py-1 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm">
+                    {product.badge}
+                  </span>
 
-                            <div className="flex items-center gap-3 flex-wrap justify-center">
-                                <Link href={PAGES.PRODUCT(product.id)}>
-                                    <Button size={"lg"}>
-                                        Подробнее
-                                    </Button>
-                                </Link>
+                  <h2 className="text-[36px] font-bold leading-tight tracking-tight sm:text-[44px]">
+                    {product.title}
+                  </h2>
 
-                                <Button size={"lg"} variant={"secondary"}>
-                                    Запросить демо <ArrowRight className="w-3.5 h-3.5" />
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </section>
-
-            <section className="py-24 bg-white">
-                <div className="max-w-5xl mx-auto text-center px-6">
-                    <h2 className="text-4xl font-bold mb-6">
-                        Единая платформа для управления бизнесом
-                    </h2>
-                    <p className="text-black/60 text-lg leading-relaxed">
-                        Наши продукты объединяются в единую систему, позволяя вам контролировать
-                        финансы, склад, сотрудников и аналитику без переключения между сервисами.
-                    </p>
+                  <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/75">
+                    {product.subtitle}
+                  </p>
                 </div>
-            </section>
 
-        </main>
-    );
+                <div className="grid w-full gap-3 sm:max-w-2xl sm:grid-cols-3">
+                  <div className="rounded-3xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur-md">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
+                      <Layers3 className="h-4 w-4" />
+                      Тарифы
+                    </div>
+                    <p className="mt-2 text-2xl font-semibold">{product.pricingPlans?.length ?? 0}</p>
+                  </div>
+
+                  <div className="rounded-3xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur-md">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
+                      <CalendarDays className="h-4 w-4" />
+                      Дедлайн
+                    </div>
+                    <p className="mt-2 text-sm font-semibold leading-6 text-white">
+                      {formatDate(nextDeadline)}
+                    </p>
+                  </div>
+
+                  <div className="rounded-3xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur-md">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
+                      <Layers3 className="h-4 w-4" />
+                      Проекты
+                    </div>
+                    <p className="mt-2 text-2xl font-semibold">{product.projects?.length ?? 0}</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                  <Button size={"lg"} asChild className="rounded-full">
+                    <Link href={PAGES.PRODUCT(product.id)}>
+                      Подробнее
+                    </Link>
+                  </Button>
+
+                  <Button size={"lg"} variant={"secondary"} className="rounded-full">
+                    Запросить демо <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Единая платформа для управления бизнесом
+          </h2>
+          <p className="text-black/60 text-lg leading-relaxed">
+            Продукты объединяются в одну базу, а организации видят свои проекты, сроки и тарифы без ручной синхронизации.
+          </p>
+        </div>
+      </section>
+    </main>
+  );
 }

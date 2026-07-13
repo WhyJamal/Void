@@ -1,0 +1,20 @@
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  ON_HOLD
+  DONE
+  ARCHIVED
+}
+
+enum BillingPeriod {
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  ONE_TIME
+}

@@ -1,0 +1,32 @@
+model Project {
+  id String @id @default(cuid())
+
+  organizationId String
+  productId      String
+  pricingPlanId  String?
+
+  name        String
+  slug        String  @unique
+  description String?
+
+  status ProjectStatus @default(ACTIVE)
+
+  startsAt DateTime?
+  endsAt   DateTime?
+  dueDate  DateTime?
+
+  budget Int?
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  pricingPlan PricingPlan? @relation(fields: [pricingPlanId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([productId])
+  @@index([pricingPlanId])
+}

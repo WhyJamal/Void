@@ -1,3 +1,5 @@
+import { PAGES } from "./pages.config";
+
 export const footerItems = [
   {
     title: "Продукт",
@@ -19,14 +21,14 @@ export const footerItems = [
     title: "Ресурсы",
     links: [
       { title: "Документация", href: "/docs" },
-      { title: "Поддержка", href: "/support" },
+      { title: "Поддержка", href: PAGES.SUPPORT },
     ],
   },
   {
     title: "Компания",
     links: [
-      { title: "О компании", href: "/about" },
-      { title: "Контакты", href: "/contact" },
+      { title: "О компании", href: PAGES.ABOUT_US },
+      { title: "Контакты", href: PAGES.CONTACTS },
     ],
   },
 ];

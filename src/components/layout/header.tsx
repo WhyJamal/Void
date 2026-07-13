@@ -51,10 +51,10 @@ export default function Header() {
                         href={PAGES.HOME}
                     >
                         <Image
-                            src="/logo.black.png"
-                            alt="void"
-                            width={35}
-                            height={35}
+                            src="/logos/bazon-logo.png"
+                            alt="Bazon"
+                            width={100}
+                            height={100}
                             priority
                         />
                     </Link>

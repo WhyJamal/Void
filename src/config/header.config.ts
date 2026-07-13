@@ -45,7 +45,7 @@ export const menuItems: MenuItem[] = [
       {
         title: "Тарифы",
         links: [
-          { title: "Посмотреть цены", href: "/pricing" },
+          { title: "Посмотреть цены", href: PAGES.PRICING },
         ],
       },
     ],
@@ -58,7 +58,7 @@ export const menuItems: MenuItem[] = [
         title: "Поддержка",
         links: [
           { title: "Документация", href: "/docs" },
-          { title: "Поддержка", href: "/support" },
+          { title: "Поддержка", href: PAGES.SUPPORT },
         ],
       },
     ],
@@ -70,8 +70,8 @@ export const menuItems: MenuItem[] = [
       {
         title: "О нас",
         links: [
-          { title: "О компании", href: "/about" },
-          { title: "Контакты", href: "/contact" },
+          { title: "О компании", href: PAGES.ABOUT_US },
+          { title: "Контакты", href: PAGES.CONTACTS },
         ],
       },
     ],
@@ -84,7 +84,7 @@ export const menuItems: MenuItem[] = [
         links: [
           { title: "Orders", href: "/orders", icon: Package },
           { title: "Your Saves", href: "/saves", icon: Bookmark },
-          { title: "Account", href: "/account", icon: Settings },
+          { title: "Account", href: PAGES.ACCOUNT, icon: Settings },
           { title: "Sign in", href: PAGES.SIGN_IN, icon: CircleUserRound },
         ],
       },

@@ -6,9 +6,12 @@ import { useState } from "react";
 import { registerAction } from "@actions/register.action";
 import { useForm } from "@/hooks/use-form";
 import { signUpSchema } from "@/schema/sign-up-schema";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function SignUpCard() {
   const [step, setStep] = useState<"base" | "password">("base");
+  const router = useRouter();
 
   const {
     values: form,
@@ -24,8 +27,19 @@ export default function SignUpCard() {
       confirmPassword: "",
     },
     schema: signUpSchema,
+
     onSubmit: async (data) => {
       await registerAction(data);
+
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (!result?.error) {
+        router.replace("/account");
+      }
     },
   });
 

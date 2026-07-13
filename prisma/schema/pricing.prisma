@@ -1,0 +1,24 @@
+model PricingPlan {
+  id        String @id @default(cuid())
+  productId String
+
+  name          String
+  slug          String
+  description   String?
+  price         Int
+  currency      String        @default("USD")
+  billingPeriod BillingPeriod
+  features      Json
+  isPopular     Boolean       @default(false)
+  seats         Int?
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  projects Project[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, slug])
+  @@index([productId])
+}

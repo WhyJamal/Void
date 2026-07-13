@@ -1,4 +1,4 @@
-import { Footer } from "@/components/layout/footer";
+import FooterWrapper from "@/components/layout/footer-wrapper";
 import Header from "@/components/layout/header";
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
         {children}
       </main>
 
-      <Footer />
+      <FooterWrapper />
 
     </div>
   );

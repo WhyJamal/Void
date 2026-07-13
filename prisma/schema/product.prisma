@@ -1,0 +1,38 @@
+model Product {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  subtitle    String
+  badge       String
+  description String?
+  image       String
+  imageAlt    String
+  featured    Boolean @default(false)
+
+  themeFrom String @default("#ffffff")
+  themeVia  String @default("#f8fafc")
+  themeTo   String @default("#e2e8f0")
+  glow1     String @default("bg-white/20")
+  glow2     String @default("bg-white/10")
+
+  solutionSection Json?
+
+  organizations OrganizationProduct[]
+  projects      Project[]
+  pricingPlans  PricingPlan[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrganizationProduct {
+  id             String @id @default(cuid())
+  organizationId String
+  productId      String
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  product      Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, productId])
+  @@index([productId])
+}

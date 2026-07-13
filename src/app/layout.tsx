@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Void",
-  description: "Void",
+  title: "bazon",
+  description: "Bazon - Разработка корпоративного ПО",
 };
 
 export default function RootLayout({

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { footerItems } from "@config/footer.config";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -14,7 +15,15 @@ export function Footer() {
   return (
     <footer className="w-full border-t bg-[#f5f5f7] text-sm text-gray-500">
 
-      <div className="hidden md:grid max-w-5xl mx-auto px-4 py-10 grid-cols-4 gap-8">
+      <div className="hidden md:grid max-w-5xl mx-auto px-4 py-10 grid-cols-5 gap-8">
+        <Image
+          src="/logos/bazon-laurel-wreath.png"
+          alt="Bazon"
+          width={100}
+          height={100}
+          priority
+        />
+
         {footerItems.map((item) => (
           <div key={item.title}>
             <h4 className="text-gray-900 font-medium mb-3">
@@ -47,9 +56,8 @@ export function Footer() {
             </button>
 
             <div
-              className={`overflow-hidden transition-all duration-300 ${
-                openIndex === index ? "max-h-40" : "max-h-0"
-              }`}
+              className={`overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-40" : "max-h-0"
+                }`}
             >
               <ul className="px-4 pb-3 space-y-2">
                 {item.links.map((link) => (
