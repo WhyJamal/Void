@@ -25,7 +25,7 @@ export default async function ERPProductsPage() {
   const products = await getProductsAction();
 
   return (
-    <main className="min-h-screen bg-[#f9f9f9] text-black">
+    <main className="min-h-screen">
       <section className="px-6 pb-8 pt-16 md:px-10">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
@@ -119,7 +119,7 @@ export default async function ERPProductsPage() {
         })}
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-6">
             Единая платформа для управления бизнесом

@@ -27,7 +27,7 @@ export default function DropdownMenu({
                 style={{ zIndex: 40 }}
             >
                 <div
-                    className="w-full bg-[rgba(255,255,255,0.92)] backdrop-blur-xl"
+                    className="w-full bg-[rgba(255,255,255,0.92)] backdrop-blur-xl border-b border-[rgba(0,0,0,0.08)] dark:bg-black"
                     style={{ paddingTop: "28px", paddingBottom: "36px" }}
                 >
                     <div className="max-w-5xl mx-auto px-10">
@@ -41,7 +41,7 @@ export default function DropdownMenu({
                                 {activeItem.columns.map((col) => (
                                     <div key={col.title}>
                                         <p
-                                            className="text-[#6e6e73] mb-3"
+                                            className="text-[#6e6e73] mb-3 dark:text-[#a0a0a4]"
                                             style={{ fontSize: "12px" }}
                                         >
                                             {col.title}
@@ -53,7 +53,7 @@ export default function DropdownMenu({
                                                     <li key={link.title}>
                                                         <Link
                                                             href={link.href}
-                                                            className="block text-[#1d1d1f] hover:text-[#6e6e73] transition-colors"
+                                                            className="block text-[#1d1d1f] hover:text-[#6e6e73] transition-colors dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                                                             style={{
                                                                 fontSize: "17px",
                                                                 lineHeight: "1.47",

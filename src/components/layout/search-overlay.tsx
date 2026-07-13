@@ -60,26 +60,26 @@ export default function SearchOverlay({
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >
-                <div className="w-full bg-[rgba(255,255,255,0.92)] backdrop-blur-xl" style={{ minHeight: "320px", paddingBottom: "48px" }}>
+                <div className="w-full bg-[rgba(255,255,255,0.92)] backdrop-blur-xl dark:bg-black" style={{ minHeight: "320px", paddingBottom: "48px" }}>
                     <div className="max-w-5xl mx-auto px-4">
 
                         <div
                             className="flex items-center gap-3 border-b border-[rgba(0,0,0,0.1)]"
                             style={{ height: "52px" }}
                         >
-                            <Search size={18} className="shrink-0 text-[#6e6e73]" />
+                            <Search size={18} className="shrink-0 text-[#6e6e73] dark:text-[#f5f5f7]" />
                             <input
                                 ref={inputRef}
                                 type="text"
                                 value={query}
                                 onChange={(e) => onQueryChange(e.target.value)}
                                 placeholder="Поиск"
-                                className="flex-1 bg-transparent outline-none text-[19px] text-[#1d1d1f] placeholder:text-[#6e6e73]"
+                                className="flex-1 bg-transparent outline-none text-[19px] text-[#1d1d1f] placeholder:text-[#6e6e73] dark:text-[#f5f5f7] dark:placeholder:text-[#6e6e73]"
                             />
                             {query && (
                                 <button
                                     onClick={() => onQueryChange("")}
-                                    className="shrink-0 text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+                                    className="shrink-0 text-[#6e6e73] hover:text-[#1d1d1f] transition-colors dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                                     aria-label="Clear"
                                 >
                                     <X size={18} />
@@ -96,11 +96,11 @@ export default function SearchOverlay({
                                     {QUICK_LINKS.map((item) => (
                                         <li key={item}>
                                             <button
-                                                className="flex items-center gap-2 text-[#1d1d1f] hover:text-[#6e6e73] transition-colors py-1"
+                                                className="flex items-center gap-2 text-[#1d1d1f] hover:text-[#6e6e73] transition-colors py-1 dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                                                 style={{ fontSize: "17px" }}
                                                 onClick={() => onQueryChange(item)}
                                             >
-                                                <ArrowRight size={14} className="text-[#6e6e73]" />
+                                                <ArrowRight size={14} className="text-[#6e6e73] dark:text-[#f5f5f7]" />
                                                 {item}
                                             </button>
                                         </li>
@@ -119,17 +119,17 @@ export default function SearchOverlay({
                                         filtered.map((item) => (
                                             <li key={item}>
                                                 <button
-                                                    className="flex items-center gap-3 text-[#1d1d1f] hover:text-[#6e6e73] transition-colors py-1"
+                                                    className="flex items-center gap-3 text-[#1d1d1f] hover:text-[#6e6e73] transition-colors py-1 dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                                                     style={{ fontSize: "17px" }}
                                                     onClick={() => onQueryChange(item)}
                                                 >
-                                                    <Search size={14} className="text-[#6e6e73] shrink-0" />
+                                                    <Search size={14} className="text-[#6e6e73] shrink-0 dark:text-[#f5f5f7]" />
                                                     {item}
                                                 </button>
                                             </li>
                                         ))
                                     ) : (
-                                        <li className="text-[#6e6e73] py-1" style={{ fontSize: "17px" }}>
+                                        <li className="text-[#6e6e73] py-1 dark:text-[#f5f5f7]" style={{ fontSize: "17px" }}>
                                             Нет результатов для &ldquo;{query}&rdquo;
                                         </li>
                                     )}

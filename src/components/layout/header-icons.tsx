@@ -1,8 +1,8 @@
 "use client";
 
 import { Menu, Search } from "lucide-react";
-import { Button } from "@components/ui/button";
 import CircleUserRound from "@icons/circle-user-round";
+import { ToggleTheme } from "../toggle-theme";
 
 interface HeaderIconsProps {
     profilePinned: boolean;
@@ -20,24 +20,26 @@ export default function HeaderIcons({
     onMobileOpen,
 }: HeaderIconsProps) {
     return (
-        <div className="flex items-center gap-4 text-[#4a5565]">
+        <div className="flex items-center gap-4 text-[#4a5565] dark:text-white/90">
+            <ToggleTheme />
+
             <button
                 onClick={onSearchClick}
                 aria-label="Open search"
                 className={`cursor-pointer transition-colors ${
-                    searchPinned ? "text-[#1d1d1f]" : "hover:text-[#1d1d1f]"
+                    searchPinned ? "text-[#1d1d1f] dark:text-[#f5f5f7]" : "hover:text-[#1d1d1f] dark:hover:text-[#6e6e73]"
                 }`}
             >
-                <Search size={20} />
+                <Search size={18} />
             </button>
 
             <div
                 onClick={onProfileClick}
                 className={`cursor-pointer transition-colors ${
-                    profilePinned ? "text-[#1d1d1f]" : "hover:text-[#1d1d1f]"
+                    profilePinned ? "text-[#1d1d1f] dark:text-[#f5f5f7]" : "hover:text-[#1d1d1f] dark:hover:text-[#6e6e73]"
                 }`}
             >
-                <CircleUserRound />
+                <CircleUserRound size={20}/>
             </div>
 
             {/* <Button size="sm">Sign in</Button> */}
@@ -47,7 +49,7 @@ export default function HeaderIcons({
                 onClick={onMobileOpen}
                 aria-label="Open menu"
             >
-                <Menu className="text-gray-600" />
+                <Menu className="text-gray-600 dark:text-white/90" />
             </button>
         </div>
     );

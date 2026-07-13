@@ -4,6 +4,7 @@ import { footerItems } from "@config/footer.config";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { Logo, LogoType } from "../logo";
 
 export function Footer() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -13,20 +14,15 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full border-t bg-[#f5f5f7] text-sm text-gray-500">
+    <footer className="w-full border-t text-sm text-gray-500 dark:text-gray-400">
 
       <div className="hidden md:grid max-w-5xl mx-auto px-4 py-10 grid-cols-5 gap-8">
-        <Image
-          src="/logos/bazon-laurel-wreath.png"
-          alt="Bazon"
-          width={100}
-          height={100}
-          priority
-        />
+        
+        <Logo logo={LogoType.secondary} />
 
         {footerItems.map((item) => (
           <div key={item.title}>
-            <h4 className="text-gray-900 font-medium mb-3">
+            <h4 className="text-gray-900 font-medium mb-3 dark:text-white">
               {item.title}
             </h4>
 
@@ -79,7 +75,7 @@ export function Footer() {
 
       <div className="border-t">
         <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-gray-400">
-          <p>© 2026 Void. All rights reserved.</p>
+          <p>© 2026 <span className="text-blue-700">Bazon</span>. All rights reserved.</p>
 
           <div className="flex gap-4">
             <Link href="/privacy">Privacy</Link>

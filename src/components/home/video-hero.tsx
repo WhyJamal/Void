@@ -27,7 +27,7 @@ export default function VideoHero({ isPlaying, onToggle }: VideoHeroProps) {
   }, [isPlaying])
 
   return (
-    <section className="relative my-2 h-[85vh] sm:h-[90vh] overflow-hidden bg-black">
+    <section className="relative my-2 h-[85vh] sm:h-[90vh] overflow-hidden">
 
       <video
         ref={videoRef}

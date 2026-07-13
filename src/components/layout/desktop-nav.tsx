@@ -25,10 +25,10 @@ export default function DesktopNav({
                         onMouseLeave={onMouseLeave}
                         className={`px-3 h-full text-[12px] transition-colors whitespace-nowrap ${
                             activeItem?.label === item.label
-                                ? "text-[#1d1d1f]"
+                                ? "text-[#1d1d1f] dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                                 : activeItem
-                                ? "text-[#6e6e73]"
-                                : "text-[#1d1d1f] hover:text-[#6e6e73]"
+                                ? "text-[#6e6e73] dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
+                                : "text-[#1d1d1f] hover:text-[#6e6e73] dark:text-[#f5f5f7] dark:hover:text-[#6e6e73]"
                         }`}
                     >
                         {item.label}

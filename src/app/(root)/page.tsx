@@ -20,7 +20,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-medium text-black/60 shadow-sm backdrop-blur">
+    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-medium text-black/60 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/70 dark:text-white/60">
       <Sparkles className="h-3.5 w-3.5" />
       <span>{children}</span>
     </div>
@@ -29,7 +29,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#f5f5f7] text-black antialiased">
+    <main className="min-h-screen bg-[#f5f5f7] text-black antialiased dark:bg-[#090909] dark:text-white">
 
       <HeroSection />
 
@@ -47,7 +47,7 @@ export default function HomePage() {
               Всё, что нужно вашей команде, удобно организовано.
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-black/60 sm:text-lg">
+            <p className="mt-4 text-base leading-7 text-black/60 sm:text-lg dark:text-white/60">
               Держите интерфейс простым, с большими отступами и мягкими взаимодействиями для комфортной работы.
             </p>
           </div>

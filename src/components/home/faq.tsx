@@ -20,7 +20,7 @@ function FAQItem({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: index * 0.04, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="border-b border-black/8 last:border-0"
+            className="border-b border-black/8 last:border-0 dark:border-white/10"
         >
             <button
                 onClick={onToggle}
@@ -39,9 +39,9 @@ function FAQItem({
                     }}
                 >
                     {isOpen ? (
-                        <Minus className="h-3.5 w-3.5 text-white" />
+                        <Minus className="h-3.5 w-3.5 text-white dark:text-black" />
                     ) : (
-                        <Plus className="h-3.5 w-3.5 text-black/50" />
+                        <Plus className="h-3.5 w-3.5 text-black/50 dark:text-white/50" />
                     )}
                 </div>
             </button>
@@ -55,7 +55,7 @@ function FAQItem({
                         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                         className="overflow-hidden"
                     >
-                        <p className="pb-6 text-[17px] leading-7 text-black/55 max-w-2xl">
+                        <p className="pb-6 text-[17px] leading-7 text-black/55 max-w-2xl dark:text-white/55">
                             {item.a}
                         </p>
                     </motion.div>
@@ -105,7 +105,7 @@ export function FAQ() {
                     transition={{ delay: 0.3 }}
                     className="mt-16 text-center"
                 >
-                    <p className="text-black/50 mb-4">Не нашли ответ на свой вопрос?</p>
+                    <p className="text-black/50 mb-4 dark:text-white/50">Не нашли ответ на свой вопрос?</p>
                     <a
                         href="#"
                         className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-75"

@@ -44,7 +44,7 @@ export default function ContactPage() {
 
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-emerald-500" />
-              <p>info@void.uz</p>
+              <p>info@bazon.uz</p>
             </div>
 
             <div className="flex items-center gap-3">
@@ -54,7 +54,7 @@ export default function ContactPage() {
 
             <div className="flex items-center gap-3">
               <Globe className="w-5 h-5 text-emerald-500" />
-              <p>www.void.uz</p>
+              <p>www.bazon.uz</p>
             </div>
 
           </div>

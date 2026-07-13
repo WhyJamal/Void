@@ -57,7 +57,7 @@ export default function SyncedCarousel() {
             ref={rootRef}
             className="w-full select-none overflow-hidden"
         >
-            <h1 className="ml-9 text-3xl font-semibold text-[#1d1d1f] py-3 tracking-tight">
+            <h1 className="ml-9 text-3xl font-semibold text-[#1d1d1f] py-3 tracking-tight dark:text-white">
                 Управляйте задачами проще.
             </h1>
 

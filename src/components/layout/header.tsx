@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useHeaderMenu } from "@/components/hooks/use-header-menu";
 import { menuItems } from "@config/header.config";
 import DesktopNav from "./desktop-nav";
@@ -10,6 +9,7 @@ import MobileMenu from "./mobile-menu";
 import SearchOverlay from "./search-overlay";
 import Link from "next/link";
 import { PAGES } from "@/config/pages.config";
+import { Logo } from "../logo";
 
 export default function Header() {
 
@@ -43,20 +43,14 @@ export default function Header() {
     return (
         <div className="sticky top-0 z-50">
             <nav
-                className="w-full bg-[rgba(255,255,255,0.6)] backdrop-blur-2xl supports-backdrop-filter:bg-[rgba(255,255,255,0.5)] border-b border-[rgba(0,0,0,0.08)] relative z-50"
+                className="w-full bg-[rgba(255,255,255,0.6)] backdrop-blur-2xl supports-backdrop-filter:bg-[rgba(255,255,255,0.5)] border-b border-[rgba(0,0,0,0.08)] relative z-50 dark:bg-black"
                 style={{ height: "44px" }}
             >
                 <div className="max-w-5xl mx-auto h-full flex items-center justify-between px-4">
                     <Link
                         href={PAGES.HOME}
                     >
-                        <Image
-                            src="/logos/bazon-logo.png"
-                            alt="Bazon"
-                            width={100}
-                            height={100}
-                            priority
-                        />
+                        <Logo />
                     </Link>
 
                     <DesktopNav

@@ -12,7 +12,7 @@ export default function SupportPage() {
       <div className="max-w-4xl mx-auto px-6 pt-10 pb-12 text-center">
         <Image
           src="/logos/favicon.png"
-          alt="VOID Logo"
+          alt="bazon"
           className="mx-auto"
           width={100}
           height={100}
@@ -56,7 +56,7 @@ export default function SupportPage() {
             Электронная почта
           </h3>
           <p className="mt-2 text-slate-600 text-sm">
-            Напишите нам: info@void.uz
+            Напишите нам: info@bazon.uz
           </p>
         </div>
 
