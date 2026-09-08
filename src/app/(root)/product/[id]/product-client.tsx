@@ -75,8 +75,10 @@ export default function ProductClient({ product }: ProductClientProps) {
                 </Link>
               </Button>
 
-              <Button size="lg" variant="secondary">
-                Запросить демо <ArrowRight className="h-4 w-4" />
+              <Button size="lg" variant="secondary" asChild>
+                <Link href={PAGES.CONTACTS}>
+                  Запросить демо <ArrowRight className="h-4 w-4" />
+                </Link>
               </Button>
             </div>
 
@@ -183,6 +185,7 @@ export default function ProductClient({ product }: ProductClientProps) {
         title={`${product.title}: тарифы и планы`}
         description="Тарифы можно настроить под конкретный проект или использовать как базовые планы для организации."
         plans={pricingPlans}
+        productId={product.id}
         productHref={PAGES.PRODUCT(product.id)}
       />
 
@@ -203,15 +206,20 @@ export default function ProductClient({ product }: ProductClientProps) {
           </div>
 
           <div className="flex gap-3">
-            <Button size="lg" variant="secondary">
-              Начать бесплатно
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="#pricing">
+                Выбрать тариф
+              </Link>
             </Button>
 
             <Button
               variant="outline"
               className="rounded-full border-white/15 bg-white/5 px-6 py-6 text-white hover:bg-white hover:text-black"
+              asChild
             >
-              Посмотреть тарифы
+              <Link href="#pricing">
+                Посмотреть тарифы
+              </Link>
             </Button>
           </div>
         </div>

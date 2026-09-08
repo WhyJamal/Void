@@ -8,7 +8,7 @@ async function main() {
     where: { email: "owner@void.app" },
     update: {},
     create: {
-      name: "Owner",
+      name: "Владелец",
       email: "owner@void.app",
       password,
     },
@@ -32,13 +32,15 @@ async function main() {
 
   const products = [
     {
-      slug: "retail-commerce",
-      title: "Розница и торговля",
-      subtitle: "Аналитика в реальном времени по всем отделам в единой панели управления.",
-      badge: "Новинка",
-      description: "Платформа для магазинов, сетей и дистрибуции с понятной аналитикой и управлением запасами.",
+      slug: "vol-mart",
+      title: "Vol-mart",
+      subtitle:
+        "Касса, склад и задолженности для магазина — единая система, готовая к работе за несколько минут.",
+      badge: "Самый популярный",
+      description:
+        "Система управления POS-кассой, складским учетом и задолженностями клиентов и поставщиков для магазинов Узбекистана.",
       image: "/images/products/stock-market.webp",
-      imageAlt: "Розница и торговля",
+      imageAlt: "Vol-mart — система управления магазином",
       featured: true,
       themeFrom: "#ffffff",
       themeVia: "#fff7ed",
@@ -46,43 +48,44 @@ async function main() {
       glow1: "bg-yellow-200/40",
       glow2: "bg-orange-200/30",
       solutionSection: {
-        badge: "Решения для розничной торговли",
+        badge: "Решение для магазинов",
         title:
-          "Повышение эффективности и роста в розничной торговле с помощью единой цифровой платформы",
+          "Полностью контролируйте кассу, склад и задолженности в одной системе",
         description:
-          "Оптимизируйте операции, улучшайте клиентский опыт и принимайте решения на основе данных в реальном времени.",
+          "Отслеживайте продажи, остатки товаров и задолженности клиентов и поставщиков в реальном времени — без бумажной работы и ошибок.",
 
         media: {
           type: "image",
           src: "/images/products/stock-market.webp",
-          alt: "Розничный магазин",
+          alt: "POS-терминал Vol-mart",
         },
 
-        listTitle:
-          "Решения помогут вам в решении следующих задач:",
+        listTitle: "Vol-mart поможет вам:",
 
         items: [
           {
-            text: "Централизация данных о продажах и клиентах",
+            text: "Быстро оформлять продажи через POS-кассу и принимать наличные, карты и QR-платежи",
           },
           {
-            text: "Оптимизация управления запасами",
+            text: "Контролировать складские остатки и перемещения товаров",
           },
           {
-            text: "Автоматизация процессов продаж",
+            text: "Вести учет задолженностей клиентов и поставщиков",
           },
         ],
 
-        ctaLabel: "Читать информационный документ",
+        ctaLabel: "Подробнее",
         ctaHref: "/docs/retail-brief.pdf",
       },
     },
     {
       slug: "team-erp",
       title: "Командный ERP",
-      subtitle: "Задачи, роли, дедлайны и контроль процессов в одном продукте.",
+      subtitle:
+        "Задачи, роли, дедлайны и контроль процессов в одном продукте.",
       badge: "Популярно",
-      description: "Внутренний продукт для управления проектами, сотрудниками и процессами компании.",
+      description:
+        "Внутренний продукт для управления проектами, сотрудниками и процессами компании.",
       image: "/images/showcase/photo-1552664730-d307ca884978.webp",
       imageAlt: "Командный ERP",
       featured: false,
@@ -104,8 +107,7 @@ async function main() {
           alt: "Розничный магазин",
         },
 
-        listTitle:
-          "Решения помогут вам в решении следующих задач:",
+        listTitle: "Решения помогут вам решить следующие задачи:",
 
         items: [
           {
@@ -126,9 +128,11 @@ async function main() {
     {
       slug: "finance-analytics",
       title: "Финансы и аналитика",
-      subtitle: "Отчеты, бюджеты и прозрачная картина по деньгам и эффективности.",
+      subtitle:
+        "Отчеты, бюджеты и прозрачная картина по финансам и эффективности.",
       badge: "Для роста",
-      description: "Финансовый модуль для руководителей, аналитиков и операционных команд.",
+      description:
+        "Финансовый модуль для руководителей, аналитиков и операционных команд.",
       image: "/images/showcase/photo-1551288049-bebda4e38f71.webp",
       imageAlt: "Финансы и аналитика",
       featured: false,
@@ -150,8 +154,7 @@ async function main() {
           alt: "Розничный магазин",
         },
 
-        listTitle:
-          "Решения помогут вам в решении следующих задач:",
+        listTitle: "Решения помогут вам решить следующие задачи:",
 
         items: [
           {
@@ -171,7 +174,11 @@ async function main() {
     },
   ] as const;
 
-  const dbProducts = [] as Array<{ id: string; slug: string; title: string }>;
+  const dbProducts = [] as Array<{
+    id: string;
+    slug: string;
+    title: string;
+  }>;
 
   for (const product of products) {
     const item = await prisma.product.upsert({
@@ -199,21 +206,23 @@ async function main() {
     dbProducts.push(item);
   }
 
-  const retail = dbProducts.find((item) => item.slug === "retail-commerce");
+  const retail = dbProducts.find((item) => item.slug === "vol-mart");
   const team = dbProducts.find((item) => item.slug === "team-erp");
-  const finance = dbProducts.find((item) => item.slug === "finance-analytics");
+  const finance = dbProducts.find(
+    (item) => item.slug === "finance-analytics"
+  );
 
   if (!retail || !team || !finance) {
     throw new Error("Не удалось создать продукты");
   }
 
   const retailProject = await prisma.project.upsert({
-    where: { slug: "retail-rollout-2026" },
+    where: { slug: "vol-mart-do-koni-1" },
     update: {},
     create: {
-      name: "Retail Rollout 2026",
-      slug: "retail-rollout-2026",
-      description: "Пилотный запуск для сети магазинов.",
+      name: "Vol-mart — Магазин №1",
+      slug: "vol-mart-do-koni-1",
+      description: "Vol-mart запущен для одного магазина.",
       organizationId: organization.id,
       productId: retail.id,
       status: "ACTIVE",
@@ -269,39 +278,54 @@ async function main() {
   const pricingPlans = [
     {
       productId: retail.id,
-      name: "Старт",
+      name: "Стартовый",
       slug: "starter",
-      description: "Для небольших торговых команд.",
-      price: 49000,
-      currency: "USD",
+      description: "Начальный тариф для одного магазина.",
+      price: 199000,
+      currency: "UZS",
       billingPeriod: "MONTHLY",
-      features: ["1 магазин", "Базовая аналитика", "Email-поддержка"],
+      features: [
+        "1 магазин",
+        "POS-касса",
+        "Остатки на складе",
+        "Поддержка по Email",
+      ],
       isPopular: false,
-      seats: 5,
+      seats: 3,
     },
     {
       productId: retail.id,
-      name: "Рост",
-      slug: "growth",
-      description: "Для сетей и расширения ассортимента.",
-      price: 99000,
-      currency: "USD",
+      name: "Бизнес",
+      slug: "business",
+      description: "Для нескольких торговых точек и сотрудников.",
+      price: 449000,
+      currency: "UZS",
       billingPeriod: "MONTHLY",
-      features: ["До 10 магазинов", "Сквозная аналитика", "Роли и права", "Приоритетная поддержка"],
+      features: [
+        "До 5 торговых точек",
+        "Задолженности клиентов и поставщиков",
+        "Роли и разрешения",
+        "Приоритетная поддержка",
+      ],
       isPopular: true,
-      seats: 20,
+      seats: 15,
     },
     {
       productId: retail.id,
-      name: "Пилот проекта",
-      slug: "pilot-project",
-      description: "Спецусловия для запуска пилота.",
-      price: 150000,
-      currency: "USD",
-      billingPeriod: "ONE_TIME",
-      features: ["Настройка под сеть", "Обучение команды", "Запуск за 30 дней"],
+      name: "Сеть",
+      slug: "network",
+      description: "Полная настройка для сети магазинов.",
+      price: 990000,
+      currency: "UZS",
+      billingPeriod: "MONTHLY",
+      features: [
+        "Неограниченное количество точек",
+        "Все отчеты",
+        "Индивидуальная настройка",
+        "Поддержка 24/7",
+      ],
       isPopular: false,
-      seats: 10,
+      seats: 50,
     },
     {
       productId: team.id,
@@ -319,7 +343,7 @@ async function main() {
       productId: team.id,
       name: "Корпоративный проект",
       slug: "enterprise-project",
-      description: "Тариф под внедрение в компанию.",
+      description: "Тариф для внедрения в компанию.",
       price: 120000,
       currency: "USD",
       billingPeriod: "MONTHLY",
@@ -347,7 +371,7 @@ async function main() {
         productId: plan.productId,
         slug: plan.slug,
       },
-    })
+    });
 
     if (existingPlan) {
       await prisma.pricingPlan.update({
@@ -384,3 +408,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+

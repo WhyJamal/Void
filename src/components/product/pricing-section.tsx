@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { IPricingPlan } from "@/types/product.types";
+import { purchaseProductAction } from "@/actions/purchase.action";
 
 function formatPrice(price: number, currency: string) {
   return new Intl.NumberFormat("ru-RU", {
@@ -30,11 +31,13 @@ export function PricingSection({
   title = "Тарифы",
   description,
   plans,
+  productId,
   productHref,
 }: {
   title?: string;
   description?: string;
   plans: IPricingPlan[];
+  productId?: string;
   productHref?: string;
 }) {
   if (!plans.length) {
@@ -42,7 +45,7 @@ export function PricingSection({
   }
 
   return (
-    <section className="border-t border-black/10 bg-white dark:bg-black dark:border-white/10 px-6 py-20 md:px-10">
+    <section id="pricing" className="border-t border-black/10 bg-white dark:bg-black dark:border-white/10 px-6 py-20 md:px-10">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
@@ -103,11 +106,21 @@ export function PricingSection({
               </ul>
 
               <div className="mt-8">
-                <Button asChild className="w-full rounded-full">
-                  <Link href={productHref ?? "#"}>
-                    Выбрать тариф
-                  </Link>
-                </Button>
+                {productId ? (
+                  <form action={purchaseProductAction}>
+                    <input type="hidden" name="productId" value={productId} />
+                    <input type="hidden" name="pricingPlanId" value={plan.id} />
+                    <Button type="submit" className="w-full rounded-full">
+                      Выбрать тариф
+                    </Button>
+                  </form>
+                ) : (
+                  <Button asChild className="w-full rounded-full">
+                    <Link href={productHref ?? "#"}>
+                      Выбрать тариф
+                    </Link>
+                  </Button>
+                )}
               </div>
             </article>
           ))}

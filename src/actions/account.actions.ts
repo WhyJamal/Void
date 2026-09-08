@@ -19,7 +19,7 @@ import {
 
 const ACCOUNT_ROOT = PAGES.ACCOUNT;
 
-async function getCurrentOrganization(userId: string): Promise<OrganizationWorkspace | null> {
+export async function getCurrentOrganization(userId: string): Promise<OrganizationWorkspace | null> {
   return prisma.organization.findFirst({
     where: {
       OR: [{ ownerId: userId }, { members: { some: { userId } } }],
@@ -199,85 +199,6 @@ export async function changePasswordAction(formData: FormData) {
   });
 
   revalidatePath(`${ACCOUNT_ROOT}/security`);
-}
-
-export async function createProjectAction(formData: FormData) {
-  const user = await requireUser();
-  const organization = await getCurrentOrganization(user.id);
-
-  if (!organization) {
-    throw new Error("Сначала создайте организацию");
-  }
-
-  const name = normalizeText(formData.get("name"));
-  const description = normalizeText(formData.get("description"));
-  const productId = normalizeText(formData.get("productId"));
-  const pricingPlanId = normalizeText(formData.get("pricingPlanId"));
-  const dueDate = normalizeDate(formData.get("dueDate"));
-  const budget = normalizeNumber(formData.get("budget"));
-
-  if (!name) {
-    throw new Error("Введите название проекта");
-  }
-
-  if (!productId) {
-    throw new Error("Выберите продукт");
-  }
-
-  const linkedProduct = await prisma.organizationProduct.findUnique({
-    where: {
-      organizationId_productId: {
-        organizationId: organization.id,
-        productId,
-      },
-    },
-    select: { id: true },
-  });
-
-  if (!linkedProduct) {
-    await prisma.organizationProduct.create({
-      data: {
-        organizationId: organization.id,
-        productId,
-      },
-    });
-  }
-
-  if (pricingPlanId) {
-    const plan = await prisma.pricingPlan.findUnique({
-      where: { id: pricingPlanId },
-      select: { id: true, productId: true },
-    });
-
-    if (!plan || plan.productId !== productId) {
-      throw new Error("Тариф не соответствует выбранному продукту");
-    }
-  }
-
-  const slug = await getUniqueSlug(name, async (candidate) => {
-    const row = await prisma.project.findUnique({
-      where: { slug: candidate },
-      select: { id: true },
-    });
-    return Boolean(row);
-  });
-
-  await prisma.project.create({
-    data: {
-      organizationId: organization.id,
-      productId,
-      pricingPlanId: pricingPlanId || null,
-      name,
-      slug,
-      description: description || null,
-      dueDate,
-      budget,
-    },
-  });
-
-  revalidatePath(ACCOUNT_ROOT);
-  revalidatePath(`${ACCOUNT_ROOT}/projects`);
-  revalidatePath(`${ACCOUNT_ROOT}/organization`);
 }
 
 export async function deleteProjectAction(formData: FormData) {

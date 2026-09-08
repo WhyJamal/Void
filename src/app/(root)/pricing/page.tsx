@@ -70,6 +70,7 @@ export default async function PricingPage() {
               title={`Тарифы для «${product.title}»`}
               description="Базовые тарифы и проектные условия собраны в одном месте."
               plans={product.pricingPlans ?? []}
+              productId={product.id}
               productHref={PAGES.PRODUCT(product.id)}
             />
           </div>

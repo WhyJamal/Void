@@ -2,6 +2,7 @@
 
 import { OrganizationWorkspace } from "@/types/account.types";
 import { getUniqueSlug, normalizeText, requireUser } from "@/utils/account.utils";
+import { getCurrentOrganization } from "@/actions/account.actions";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { PAGES } from "@/config/pages.config";
@@ -141,7 +142,7 @@ export async function createOrganizationAction(
     data: {
       name,
       slug,
-      inn,
+      inn: inn || null,
       description: description || null,
       logo: logo || null,
       ownerId: user.id,
@@ -221,42 +222,4 @@ export async function updateOrganizationAction(formData: FormData) {
 
   revalidatePath(ACCOUNT_ROOT);
   revalidatePath(`${ACCOUNT_ROOT}/organization`);
-}
-
-export async function linkProductToOrganizationAction(formData: FormData) {
-  const user = await requireUser();
-
-  const organizationId = normalizeText(formData.get("organizationId"));
-  const productId = normalizeText(formData.get("productId"));
-
-  if (!organizationId || !productId) {
-    throw new Error("Выберите организацию и продукт");
-  }
-
-  const organization = await prisma.organization.findUnique({
-    where: { id: organizationId },
-    select: { id: true, ownerId: true },
-  });
-
-  if (!organization || organization.ownerId !== user.id) {
-    throw new Error("Недостаточно прав");
-  }
-
-  await prisma.organizationProduct.upsert({
-    where: {
-      organizationId_productId: {
-        organizationId,
-        productId,
-      },
-    },
-    update: {},
-    create: {
-      organizationId,
-      productId,
-    },
-  });
-
-  revalidatePath(ACCOUNT_ROOT);
-  revalidatePath(`${ACCOUNT_ROOT}/organization`);
-  revalidatePath(`${ACCOUNT_ROOT}/projects`);
 }

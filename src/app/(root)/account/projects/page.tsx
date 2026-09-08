@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  createProjectAction,
   deleteProjectAction,
   getAccountWorkspaceAction,
 } from "@/actions/account.actions";
@@ -18,22 +17,29 @@ function formatDate(value?: string | Date | null) {
 }
 
 const statusLabel: Record<string, string> = {
+  PLANNING: "Планируется",
   ACTIVE: "Активен",
-  COMPLETED: "Завершён",
-  PAUSED: "На паузе",
-  CANCELLED: "Отменён",
+  ON_HOLD: "На паузе",
+  DONE: "Завершён",
+  ARCHIVED: "В архиве",
 };
 
 const statusColor: Record<string, string> = {
+  PLANNING: "bg-blue-100 text-blue-700",
   ACTIVE: "bg-emerald-100 text-emerald-700",
-  COMPLETED: "bg-blue-100 text-blue-700",
-  PAUSED: "bg-amber-100 text-amber-700",
-  CANCELLED: "bg-red-100 text-red-700",
+  ON_HOLD: "bg-amber-100 text-amber-700",
+  DONE: "bg-gray-100 text-gray-700",
+  ARCHIVED: "bg-red-100 text-red-700",
 };
 
-export default async function ProjectsPage() {
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ purchased?: string }>;
+}) {
   const workspace = await getAccountWorkspaceAction();
   const organization = workspace.organization;
+  const { purchased } = await searchParams;
 
   return (
     <div className="mx-auto max-w-2xl space-y-10">
@@ -45,6 +51,12 @@ export default async function ProjectsPage() {
           {organization ? "Ваши проекты" : "Создайте организацию"}
         </h1>
       </header>
+
+      {purchased && (
+        <div className="rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm text-emerald-700">
+          Продукт подключён и появился в списке ниже.
+        </div>
+      )}
 
       <div className="h-px bg-black/5" />
 
@@ -126,38 +138,22 @@ export default async function ProjectsPage() {
               ))}
             </section>
           ) : (
-            <p className="text-sm text-black/40">
-              Пока нет проектов. Создайте первый ниже.
-            </p>
+            <div className="space-y-3">
+              <p className="text-sm text-black/40">
+                Пока нет подключённых продуктов.
+              </p>
+              <Link
+                href="/products"
+                className="inline-flex rounded-full bg-[#1d1d1f] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-black/80"
+              >
+                Выбрать продукт
+              </Link>
+            </div>
           )}
 
           <div className="h-px bg-black/5" />
         </>
       )}
-    </div>
-  );
-}
-
-function Field({
-  label,
-  name,
-  placeholder,
-  type = "text",
-}: {
-  label: string;
-  name: string;
-  placeholder?: string;
-  type?: string;
-}) {
-  return (
-    <div className="space-y-1.5">
-      <label className="text-sm font-medium text-[#1d1d1f]">{label}</label>
-      <input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className="h-11 w-full rounded-2xl border border-black/10 bg-white px-4 text-sm text-[#1d1d1f] outline-none transition placeholder:text-black/30 focus:border-black/25"
-      />
     </div>
   );
 }
