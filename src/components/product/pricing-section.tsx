@@ -42,17 +42,17 @@ export function PricingSection({
   }
 
   return (
-    <section className="border-t border-black/10 bg-white px-6 py-20 md:px-10">
+    <section className="border-t border-black/10 bg-white dark:bg-black dark:border-white/10 px-6 py-20 md:px-10">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
             Прайсинг
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             {title}
           </h2>
           {description && (
-            <p className="mt-4 text-base leading-7 text-gray-500 sm:text-lg">
+            <p className="mt-4 text-base leading-7 text-gray-500 dark:text-gray-300 sm:text-lg">
               {description}
             </p>
           )}
@@ -62,14 +62,14 @@ export function PricingSection({
           {plans.map((plan) => (
             <article
               key={plan.id}
-              className={`flex h-full flex-col rounded-3xl border p-6 shadow-sm transition-all ${plan.isPopular ? "border-[#1D4ED8]/30 bg-[#EFF6FF] shadow-md" : "border-black/10 bg-white"}`}
+              className={`flex h-full flex-col rounded-3xl p-6 shadow-sm transition-all border-2 ${plan.isPopular ? "border-[#1D4ED8]/30 bg-[#EFF6FF] shadow-md dark:bg-[#0F172A]" : "border-black/10 bg-white dark:bg-black dark:border-white/10"}`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                     {plan.name}
                   </h3>
-                  <p className="mt-1 text-sm leading-6 text-gray-500">
+                  <p className="mt-1 text-sm leading-6 text-gray-500 dark:text-gray-300">
                     {plan.description}
                   </p>
                 </div>
@@ -83,11 +83,11 @@ export function PricingSection({
 
               <div className="mt-6">
                 <div className="flex items-end gap-2">
-                  <span className="text-4xl font-semibold tracking-tight text-gray-900">
+                  <span className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
                     {formatPrice(plan.price, plan.currency)}
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                   {billingLabel(plan.billingPeriod)}
                   {plan.projectName ? ` · ${plan.projectName}` : ""}
                 </p>
@@ -95,7 +95,7 @@ export function PricingSection({
 
               <ul className="mt-6 flex flex-1 flex-col gap-3">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-sm leading-6 text-gray-600">
+                  <li key={feature} className="flex gap-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#1D4ED8]" />
                     <span>{feature}</span>
                   </li>

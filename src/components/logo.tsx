@@ -2,18 +2,24 @@
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export enum LogoType {
     main = "MAIN",
     secondary = "SECONDARY",
 }
 
+export type LogoSizeType = "sm" | "md" | "lg" | "xl";
+
 interface LogoProps {
     logo?: LogoType;
+    size?: LogoSizeType;
 }
 
-export function Logo({ logo = LogoType.main }: LogoProps) {
+export function Logo({
+    logo = LogoType.main,
+    size = "sm",
+}: LogoProps) {
     const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -26,18 +32,33 @@ export function Logo({ logo = LogoType.main }: LogoProps) {
     const src =
         logo === LogoType.main
             ? isDark
-                ? "/logos/bazon-white-logo.png"
-                : "/logos/bazon-logo.png"
+                ? "/logos/narsil-white-logo.png"
+                : "/logos/narsil-logo.png"
             : isDark
-                ? "/logos/bazon-laurel-wreath-white.png"
-                : "/logos/bazon-laurel-wreath.png";
+                ? "/logos/n-white-logo.png"
+                : "/logos/n-logo.png";
+
+    const dimensions = useMemo(() => {
+        switch (size) {
+            case "sm":
+                return { width: 100, height: 100 };
+            case "md":
+                return { width: 180, height: 180 };
+            case "lg":
+                return { width: 280, height: 280 };
+            case "xl":
+                return { width: 800, height: 800 };
+            default:
+                return { width: 100, height: 100 };
+        }
+    }, [size]);
 
     return (
         <Image
             src={src}
-            alt="Bazon"
-            width={100}
-            height={100}
+            alt="Narsil"
+            width={dimensions.width}
+            height={dimensions.height}
             priority
         />
     );

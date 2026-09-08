@@ -31,7 +31,7 @@ export default async function ERPProductsPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1D4ED8]">
             Продукты
           </p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl">
             Продукты, проекты и тарифы в одной системе
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-gray-500 sm:text-lg">
@@ -74,7 +74,7 @@ export default async function ERPProductsPage() {
                   </p>
                 </div>
 
-                <div className="grid w-full gap-3 sm:max-w-2xl sm:grid-cols-3">
+                {/* <div className="grid w-full gap-3 sm:max-w-2xl sm:grid-cols-3">
                   <div className="rounded-3xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur-md">
                     <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
                       <Layers3 className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default async function ERPProductsPage() {
                     </div>
                     <p className="mt-2 text-2xl font-semibold">{product.projects?.length ?? 0}</p>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <Button size={"lg"} asChild className="rounded-full">

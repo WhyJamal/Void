@@ -37,8 +37,8 @@ export default function AuthLayout({
                 <div className="flex items-center justify-center">
                     <div className="flex h-22 w-22 items-center justify-center rounded-3xl bg-white shadow-sm ring-1 ring-black/10">
                         <Image
-                            src='/logos/favicon.png'
-                            alt='Bazon'
+                            src='/logos/narsil-logo.png'
+                            alt='narsil'
                             width={70}
                             height={70}
                         />

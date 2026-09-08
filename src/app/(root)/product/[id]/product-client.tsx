@@ -25,7 +25,7 @@ export default function ProductClient({ product }: ProductClientProps) {
   const pricingPlans = product.pricingPlans ?? [];
 
   return (
-    <main className="min-h-screen bg-[#f9f9f9] text-black">
+    <main className="min-h-screen bg-[#f9f9f9] text-black dark:bg-black dark:text-white">
       <section className="relative min-h-[70vh] overflow-hidden flex items-center">
         <div
           className="absolute inset-0 bg-linear-to-br"

@@ -77,25 +77,25 @@ export function SolutionSection({ data }: SolutionSectionProps) {
                         </span>
                     )}
 
-                    <h2 className="text-2xl sm:text-3xl font-bold leading-tight text-gray-900">
+                    <h2 className="text-2xl sm:text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100">
                         {data.title}
                     </h2>
 
                     {data.description && (
-                        <p className="mt-3 text-base leading-relaxed text-gray-500">
+                        <p className="mt-3 text-base leading-relaxed text-gray-500 dark:text-gray-300">
                             {data.description}
                         </p>
                     )}
                 </div>
 
-                <div className="grid gap-10 md:grid-cols-2 md:items-start">
+                <div className="grid gap-10 md:grid-cols-2 md:items-start mt-3">
 
                     <div>
                         <MediaBlock media={data.media} />
                     </div>
 
                     <div>
-                        <p className="mb-5 text-base font-bold leading-snug text-gray-900">
+                        <p className="mb-5 text-base font-bold leading-snug text-gray-900 dark:text-gray-300">
                             {data.listTitle}
                         </p>
 
@@ -103,7 +103,7 @@ export function SolutionSection({ data }: SolutionSectionProps) {
                             {data.items.map((it, i) => (
                                 <li key={i} className="flex gap-3">
                                     <span className="mt-1.5 h-1.75 w-1.75 shrink-0 rounded-full bg-[#1D4ED8]"/>
-                                    <span className="text-sm leading-relaxed text-gray-500">
+                                    <span className="text-sm leading-relaxed text-gray-500 dark:text-gray-300">
                                         {it.text}
                                     </span>
                                 </li>

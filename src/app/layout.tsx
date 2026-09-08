@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "bazon",
-  description: "Bazon - Разработка корпоративного ПО",
+  title: "Narsil",
+  description: "Narsil - Разработка корпоративного ПО",
 };
 
 export default function RootLayout({
